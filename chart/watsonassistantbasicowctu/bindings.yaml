@@ -3,24 +3,12 @@
 - name: WATSON_ASSISTANT_APIKEY
   valueFrom:
     secretKeyRef:
-      name: watson-assistant
+      name: watson-assistant-apikey
       key: apikey
-      optional: true
-- name: WATSON_ASSISTANT_USERNAME
-  valueFrom:
-    secretKeyRef:
-      name: watson-assistant
-      key: username
-      optional: true
-- name: WATSON_ASSISTANT_PASSWORD
-  valueFrom:
-    secretKeyRef:
-      name: watson-assistant
-      key: password
       optional: true
 - name: WATSON_ASSISTANT_URL
   valueFrom:
     secretKeyRef:
-      name: watson-assistant
+      name: watson-assistant-url
       key: url
       optional: true
