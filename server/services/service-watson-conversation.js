@@ -3,10 +3,10 @@ const AssistantV1 = require('watson-developer-cloud/assistant/v1');
 
 module.exports = function(app, serviceManager){
 	const assistant = new AssistantV1({
-		iam_apikey: IBMCloudEnv.getString('watson_conversation_apikey'),
-		username: IBMCloudEnv.getString('watson_conversation_username'),
-		password: IBMCloudEnv.getString('watson_conversation_password'),
-		url: IBMCloudEnv.getString('watson_conversation_url'),
+		iam_apikey: process.env.WATSON_ASSISTANT_APIKEY,
+		username: process.env.WATSON_ASSISTANT_USERNAME,
+		password: process.env.WATSON_ASSISTANT_PASSWORD,
+		url: process.env.WATSON_ASSISTANT_URL,
 		version: '2018-07-10',
 	});
 
