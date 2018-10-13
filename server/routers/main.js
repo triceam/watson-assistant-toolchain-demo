@@ -34,7 +34,15 @@ const params = Object.assign({ version: '2018-02-16' }, fs.existsSync('server/lo
   vcapServices.getCredentialsForStarter('conversation', require('./../localdev-config.json')) :
   vcapServices.getCredentialsForStarter('conversation'));
 
-const assistant = new AssistantV1(params);
+let params2 = {
+  api_key: process.env.WATSON_ASSISTANT_APIKEY,
+  //username: process.env.WATSON_ASSISTANT_USERNAME,
+  //password: process.env.WATSON_ASSISTANT_PASSWORD,
+  url: process.env.WATSON_ASSISTANT_URL,
+  version: '2018-09-20',
+};
+
+const assistant = new AssistantV1(params2);
 
 module.exports = function(app) {
   app.use(bodyParser.json());
