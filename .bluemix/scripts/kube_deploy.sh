@@ -4,6 +4,11 @@
 #View build properties
 cat build.properties
 
+#Source the build.properties so everything in it is an env var to this script
+set -o allexport
+source build.properties
+set +o allexport
+
 echo "Check cluster availability"
 IP_ADDR=$(bx cs workers ${PIPELINE_KUBERNETES_CLUSTER_NAME} | grep normal | head -n 1 | awk '{ print $2 }')
 if [ -z $IP_ADDR ]; then
@@ -45,6 +50,7 @@ IMAGE_REPOSITORY=${REGISTRY_URL}/${REGISTRY_NAMESPACE}/${IMAGE_NAME}
 
 # Using 'upgrade --install" for rolling updates. Note that subsequent updates will occur in the same namespace the release is currently deployed in, ignoring the explicit--namespace argument".
 echo -e "Dry run into: ${PIPELINE_KUBERNETES_CLUSTER_NAME}/${CLUSTER_NAMESPACE}."
+
 helm upgrade --install --debug --dry-run ${RELEASE_NAME} ./chart/${CHART_NAME} --set image.repository=${IMAGE_REPOSITORY},image.tag=${BUILD_NUMBER} --namespace ${CLUSTER_NAMESPACE}
 
 echo -e "Deploying into: ${PIPELINE_KUBERNETES_CLUSTER_NAME}/${CLUSTER_NAMESPACE}."
@@ -123,6 +129,8 @@ helm history ${RELEASE_NAME}
 # kubectl describe pods --selector app=${CHART_NAME} --namespace ${CLUSTER_NAMESPACE}
 
 echo "=========================================================="
+bx cs workers ${PIPELINE_KUBERNETES_CLUSTER_NAME}
+kubectl get services --namespace ${CLUSTER_NAMESPACE}
 IP_ADDR=$(bx cs workers ${PIPELINE_KUBERNETES_CLUSTER_NAME} | grep normal | head -n 1 | awk '{ print $2 }')
 PORT=$(kubectl get services --namespace ${CLUSTER_NAMESPACE} | grep ${RELEASE_NAME} | sed 's/[^:]*:\([0-9]*\).*/\1/g')
 echo -e "View the application at: http://${IP_ADDR}:${PORT}"
