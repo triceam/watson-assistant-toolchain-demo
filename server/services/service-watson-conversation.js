@@ -2,8 +2,11 @@ const IBMCloudEnv = require('ibm-cloud-env');
 const AssistantV1 = require('watson-developer-cloud/assistant/v1');
 
 module.exports = function(app, serviceManager){
+	
+	console.log('MIKE: api_key = ' + process.env.WATSON_ASSISTANT_APIKEY);
+	
 	const assistant = new AssistantV1({
-		iam_apikey: process.env.WATSON_ASSISTANT_APIKEY,
+		api_key: process.env.WATSON_ASSISTANT_APIKEY,
 		//username: process.env.WATSON_ASSISTANT_USERNAME,
 		//password: process.env.WATSON_ASSISTANT_PASSWORD,
 		url: process.env.WATSON_ASSISTANT_URL,
