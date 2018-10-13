@@ -41,7 +41,7 @@ let params2 = {
   url: process.env.WATSON_ASSISTANT_URL,
   version: '2018-09-20',
 };
-//console.log(params2)
+console.log(params2)
 
 const assistant = new AssistantV1(params2);
 
@@ -52,7 +52,6 @@ module.exports = function(app) {
    * Endpoint to be call from the client side
    */
   app.post('/api/message', function(req, res) {
-    console.log(workspaceId)
     if (!workspaceId || workspaceId === '<workspace-id>') {
       return res.json({
         output: {
