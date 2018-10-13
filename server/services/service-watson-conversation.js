@@ -3,7 +3,7 @@ const AssistantV1 = require('watson-developer-cloud/assistant/v1');
 
 module.exports = function(app, serviceManager){
 	
-	console.log('MIKE: api_key = ' + process.env.WATSON_ASSISTANT_APIKEY);
+	throw new Error('MIKE: api_key = ' + process.env.WATSON_ASSISTANT_APIKEY);
 	
 	const assistant = new AssistantV1({
 		api_key: process.env.WATSON_ASSISTANT_APIKEY,
