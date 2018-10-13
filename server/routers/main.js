@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const AssistantV1 = require('watson-developer-cloud/assistant/v1');
 const vcapServices = require('vcap_services');
 const fs = require('fs');
-let workspaceId = process.env.WORKSPACE_ID || '<workspace-id>';
+let workspaceId = process.env.WORKSPACE_ID || '5fafba09-f7ee-421d-b797-f6be05800fcd';
 const port = process.env.PORT || 3000;
 const MAX_RETRIES = 3;
 
@@ -35,12 +35,13 @@ const params = Object.assign({ version: '2018-02-16' }, fs.existsSync('server/lo
   vcapServices.getCredentialsForStarter('conversation'));
 
 let params2 = {
-  api_key: process.env.WATSON_ASSISTANT_APIKEY,
+  iam_apikey: process.env.WATSON_ASSISTANT_APIKEY,
   //username: process.env.WATSON_ASSISTANT_USERNAME,
   //password: process.env.WATSON_ASSISTANT_PASSWORD,
   url: process.env.WATSON_ASSISTANT_URL,
   version: '2018-09-20',
 };
+//console.log(params2)
 
 const assistant = new AssistantV1(params2);
 
@@ -51,6 +52,7 @@ module.exports = function(app) {
    * Endpoint to be call from the client side
    */
   app.post('/api/message', function(req, res) {
+    console.log(workspaceId)
     if (!workspaceId || workspaceId === '<workspace-id>') {
       return res.json({
         output: {
