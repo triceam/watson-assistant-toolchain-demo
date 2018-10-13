@@ -4,6 +4,11 @@
 #View build properties
 cat build.properties
 
+#Source the build.properties so everything in it is an env var to this script
+set -o allexport
+source build.properties
+set +o allexport
+
 echo "Check cluster availability"
 IP_ADDR=$(bx cs workers ${PIPELINE_KUBERNETES_CLUSTER_NAME} | grep normal | head -n 1 | awk '{ print $2 }')
 if [ -z $IP_ADDR ]; then
