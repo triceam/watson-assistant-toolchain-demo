@@ -41,7 +41,7 @@ let params2 = {
   url: process.env.WATSON_ASSISTANT_URL.replace("\n", ""),
   version: '2018-09-20',
 };
-console.log(params2)
+//console.log(params2)
 
 const assistant = new AssistantV1(params2);
 
@@ -65,11 +65,11 @@ module.exports = function(app) {
       input: req.body.input || {}
     };
 
-    console.log(payload)
+    //console.log(payload)
 
     // Send the input to the assistant service
     assistant.message(payload, function(err, data) {
-      console.log("response", data, err);
+      //console.log("response", data, err);
       if (err) {
         return res.status(err.code || 500).json(err);
       }
