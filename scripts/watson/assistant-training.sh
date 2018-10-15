@@ -6,14 +6,14 @@
 # sudo apt-get install jq -y
 
 
-
 SERVICE_NAME="watson-assistant-bas-conversation-1539357893290"
 WORKSPACE_ID="5fafba09-f7ee-421d-b797-f6be05800fcd"
 
+HOST="https://gateway-wdc.watsonplatform.net/assistant/api"
+TRAINING_DATA_PATH="scripts/watson/training-data/workspace-customer-care-en.json"
+
 
 # WATSON_API_KEY=""
-# HOST="https://gateway-wdc.watsonplatform.net/assistant/api"
-# TRAINING_DATA_PATH="training-data/workspace-customer-care-en.json"
 
 # echo "fetching service keys"
 # SERVICE_KEYS=$(bx resource service-keys --instance-name $SERVICE_NAME)
