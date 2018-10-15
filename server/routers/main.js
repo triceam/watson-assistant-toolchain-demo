@@ -35,10 +35,10 @@ const params = Object.assign({ version: '2018-02-16' }, fs.existsSync('server/lo
   vcapServices.getCredentialsForStarter('conversation'));
 
 let params2 = {
-  iam_apikey: process.env.WATSON_ASSISTANT_APIKEY,
+  iam_apikey: process.env.WATSON_ASSISTANT_APIKEY.replace("\n", ""),
   //username: process.env.WATSON_ASSISTANT_USERNAME,
   //password: process.env.WATSON_ASSISTANT_PASSWORD,
-  url: process.env.WATSON_ASSISTANT_URL,
+  url: process.env.WATSON_ASSISTANT_URL.replace("\n", ""),
   version: '2018-09-20',
 };
 console.log(params2)
