@@ -65,8 +65,11 @@ module.exports = function(app) {
       input: req.body.input || {}
     };
 
+    console.log(payload)
+
     // Send the input to the assistant service
     assistant.message(payload, function(err, data) {
+      console.log("response", data, err);
       if (err) {
         return res.status(err.code || 500).json(err);
       }
