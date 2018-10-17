@@ -65,6 +65,7 @@ div {
 
 #chat-column-holder {
   text-align: center;
+  background: yellow;
 }
 
 .chat-column {
