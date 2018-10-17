@@ -2031,7 +2031,7 @@
           "output":{
              "text":{
                 "values":[
-                   "Hello, I’m a demo customer care virtual assistant to show you the basics.  I can help with directions to my store, hours of operation and booking an in-store appointment."
+                   "Hello, I’m a demo customer care virtual assistant to show you the basics.  I can help with directions to my store, hours of operation and booking an in-store appointment.   Look, I've changed!!"
                 ],
                 "selection_policy":"sequential"
              }
