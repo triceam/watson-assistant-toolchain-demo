@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const AssistantV1 = require('watson-developer-cloud/assistant/v1');
 const vcapServices = require('vcap_services');
 const fs = require('fs');
-let workspaceId = process.env.WORKSPACE_ID || '<workspace-id>';
+let workspaceId = process.env.WORKSPACE_ID || '5fafba09-f7ee-421d-b797-f6be05800fcd';
 const port = process.env.PORT || 3000;
 const MAX_RETRIES = 3;
 
@@ -34,7 +34,16 @@ const params = Object.assign({ version: '2018-02-16' }, fs.existsSync('server/lo
   vcapServices.getCredentialsForStarter('conversation', require('./../localdev-config.json')) :
   vcapServices.getCredentialsForStarter('conversation'));
 
-const assistant = new AssistantV1(params);
+let params2 = {
+  iam_apikey: process.env.WATSON_ASSISTANT_APIKEY.replace("\n", ""),
+  //username: process.env.WATSON_ASSISTANT_USERNAME,
+  //password: process.env.WATSON_ASSISTANT_PASSWORD,
+  url: process.env.WATSON_ASSISTANT_URL.replace("\n", ""),
+  version: '2018-09-20',
+};
+//console.log(params2)
+
+const assistant = new AssistantV1(params2);
 
 module.exports = function(app) {
   app.use(bodyParser.json());
@@ -56,8 +65,11 @@ module.exports = function(app) {
       input: req.body.input || {}
     };
 
+    //console.log(payload)
+
     // Send the input to the assistant service
     assistant.message(payload, function(err, data) {
+      //console.log("response", data, err);
       if (err) {
         return res.status(err.code || 500).json(err);
       }
